@@ -1,7 +1,12 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using ServerPOSApplication.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<ServerPOSApplicationContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ServerPOSApplicationContext") ?? throw new InvalidOperationException("Connection string 'ServerPOSApplicationContext' not found.")));
 
 var app = builder.Build();
 
