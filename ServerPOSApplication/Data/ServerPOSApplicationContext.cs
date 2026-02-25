@@ -13,7 +13,15 @@ namespace ServerPOSApplication.Data
             : base(options)
         {
         }
-
+        public DbSet<ServerPOSApplication.Models.Credential> Credential { get; set; } = default!;
         public DbSet<ServerPOSApplication.Models.Discount> Discount { get; set; } = default!;
+        public DbSet<ServerPOSApplication.Models.Employee> Employee { get; set; } = default!;
+        public DbSet<ServerPOSApplication.Models.MenuItem> MenuItem { get; set; } = default!;
+        public DbSet<ServerPOSApplication.Models.OrderItem> OrderItem { get; set; } = default!;
+        public DbSet<ServerPOSApplication.Models.Order> Order { get; set; } = default!;
+        public DbSet<ServerPOSApplication.Models.Tax> Tax { get; set; } = default!;
+
+
+
     }
 }

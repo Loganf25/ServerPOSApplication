@@ -1,10 +1,13 @@
-﻿namespace ServerPOSApplication.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ServerPOSApplication.Models
 {
     public class Discount
     {
+        [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; } // "Percentage" or "FixedAmount"
+        public required string Name { get; set; }
+        public required string Type { get; set; } // "Percentage" or "FixedAmount"
         public int Value { get; set; }
     }
 }
