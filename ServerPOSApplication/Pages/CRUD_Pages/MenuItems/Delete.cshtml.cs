@@ -29,7 +29,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.MenuItems
                 return NotFound();
             }
 
-            var menuitem = await _context.MenuItem.FirstOrDefaultAsync(m => m.Id == id);
+            var menuitem = await _context.MenuItems.FirstOrDefaultAsync(m => m.Id == id);
 
             if (menuitem is not null)
             {
@@ -48,11 +48,11 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.MenuItems
                 return NotFound();
             }
 
-            var menuitem = await _context.MenuItem.FindAsync(id);
+            var menuitem = await _context.MenuItems.FindAsync(id);
             if (menuitem != null)
             {
                 MenuItem = menuitem;
-                _context.MenuItem.Remove(MenuItem);
+                _context.MenuItems.Remove(MenuItem);
                 await _context.SaveChangesAsync();
             }
 

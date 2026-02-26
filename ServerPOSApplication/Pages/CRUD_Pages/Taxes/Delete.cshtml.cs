@@ -29,7 +29,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Taxes
                 return NotFound();
             }
 
-            var tax = await _context.Tax.FirstOrDefaultAsync(m => m.Id == id);
+            var tax = await _context.Taxes.FirstOrDefaultAsync(m => m.Id == id);
 
             if (tax is not null)
             {
@@ -48,11 +48,11 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Taxes
                 return NotFound();
             }
 
-            var tax = await _context.Tax.FindAsync(id);
+            var tax = await _context.Taxes.FindAsync(id);
             if (tax != null)
             {
                 Tax = tax;
-                _context.Tax.Remove(Tax);
+                _context.Taxes.Remove(Tax);
                 await _context.SaveChangesAsync();
             }
 

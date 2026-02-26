@@ -28,7 +28,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.MenuItems
                 return NotFound();
             }
 
-            var menuitem = await _context.MenuItem.FirstOrDefaultAsync(m => m.Id == id);
+            var menuitem = await _context.MenuItems.FirstOrDefaultAsync(m => m.Id == id);
 
             if (menuitem is not null)
             {

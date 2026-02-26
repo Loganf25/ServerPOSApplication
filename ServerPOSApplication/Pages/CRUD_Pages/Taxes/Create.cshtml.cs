@@ -35,7 +35,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Taxes
                 return Page();
             }
 
-            _context.Tax.Add(Tax);
+            _context.Taxes.Add(Tax);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

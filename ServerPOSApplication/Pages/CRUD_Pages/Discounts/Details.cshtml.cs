@@ -28,7 +28,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Discounts
                 return NotFound();
             }
 
-            var discount = await _context.Discount.FirstOrDefaultAsync(m => m.Id == id);
+            var discount = await _context.Discounts.FirstOrDefaultAsync(m => m.Id == id);
 
             if (discount is not null)
             {

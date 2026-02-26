@@ -23,7 +23,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Employees
 
         public async Task OnGetAsync()
         {
-            Employee = await _context.Employee.ToListAsync();
+            Employee = await _context.Employees.ToListAsync();
         }
     }
 }

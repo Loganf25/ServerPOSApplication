@@ -29,7 +29,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Employees
                 return NotFound();
             }
 
-            var employee = await _context.Employee.FirstOrDefaultAsync(m => m.Id == id);
+            var employee = await _context.Employees.FirstOrDefaultAsync(m => m.Id == id);
 
             if (employee is not null)
             {
@@ -48,11 +48,11 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Employees
                 return NotFound();
             }
 
-            var employee = await _context.Employee.FindAsync(id);
+            var employee = await _context.Employees.FindAsync(id);
             if (employee != null)
             {
                 Employee = employee;
-                _context.Employee.Remove(Employee);
+                _context.Employees.Remove(Employee);
                 await _context.SaveChangesAsync();
             }
 

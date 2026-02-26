@@ -28,7 +28,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Employees
                 return NotFound();
             }
 
-            var employee = await _context.Employee.FirstOrDefaultAsync(m => m.Id == id);
+            var employee = await _context.Employees.FirstOrDefaultAsync(m => m.Id == id);
 
             if (employee is not null)
             {

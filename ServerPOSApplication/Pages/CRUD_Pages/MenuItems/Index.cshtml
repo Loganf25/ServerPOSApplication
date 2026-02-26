@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{searchString?}"
 @model ServerPOSApplication.Pages.CRUD_Pages.MenuItems.IndexModel
 
 @{
@@ -10,6 +10,13 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form>
+    <p>
+        <label>Name: <input type="text" asp-for="SearchString" /></label>
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>

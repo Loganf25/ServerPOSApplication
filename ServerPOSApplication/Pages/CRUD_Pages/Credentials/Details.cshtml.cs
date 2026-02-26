@@ -28,7 +28,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Credentials
                 return NotFound();
             }
 
-            var credential = await _context.Credential.FirstOrDefaultAsync(m => m.Id == id);
+            var credential = await _context.Credentials.FirstOrDefaultAsync(m => m.Id == id);
 
             if (credential is not null)
             {

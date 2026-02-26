@@ -30,7 +30,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Discounts
                 return NotFound();
             }
 
-            var discount =  await _context.Discount.FirstOrDefaultAsync(m => m.Id == id);
+            var discount =  await _context.Discounts.FirstOrDefaultAsync(m => m.Id == id);
             if (discount == null)
             {
                 return NotFound();
@@ -71,7 +71,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Discounts
 
         private bool DiscountExists(int id)
         {
-            return _context.Discount.Any(e => e.Id == id);
+            return _context.Discounts.Any(e => e.Id == id);
         }
     }
 }

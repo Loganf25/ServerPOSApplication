@@ -28,7 +28,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Taxes
                 return NotFound();
             }
 
-            var tax = await _context.Tax.FirstOrDefaultAsync(m => m.Id == id);
+            var tax = await _context.Taxes.FirstOrDefaultAsync(m => m.Id == id);
 
             if (tax is not null)
             {

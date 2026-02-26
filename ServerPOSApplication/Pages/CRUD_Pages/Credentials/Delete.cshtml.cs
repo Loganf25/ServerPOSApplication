@@ -29,7 +29,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Credentials
                 return NotFound();
             }
 
-            var credential = await _context.Credential.FirstOrDefaultAsync(m => m.Id == id);
+            var credential = await _context.Credentials.FirstOrDefaultAsync(m => m.Id == id);
 
             if (credential is not null)
             {
@@ -48,11 +48,11 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Credentials
                 return NotFound();
             }
 
-            var credential = await _context.Credential.FindAsync(id);
+            var credential = await _context.Credentials.FindAsync(id);
             if (credential != null)
             {
                 Credential = credential;
-                _context.Credential.Remove(Credential);
+                _context.Credentials.Remove(Credential);
                 await _context.SaveChangesAsync();
             }
 

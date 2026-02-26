@@ -30,7 +30,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Taxes
                 return NotFound();
             }
 
-            var tax =  await _context.Tax.FirstOrDefaultAsync(m => m.Id == id);
+            var tax =  await _context.Taxes.FirstOrDefaultAsync(m => m.Id == id);
             if (tax == null)
             {
                 return NotFound();
@@ -71,7 +71,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Taxes
 
         private bool TaxExists(int id)
         {
-            return _context.Tax.Any(e => e.Id == id);
+            return _context.Taxes.Any(e => e.Id == id);
         }
     }
 }

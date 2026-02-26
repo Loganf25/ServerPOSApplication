@@ -23,7 +23,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Taxes
 
         public async Task OnGetAsync()
         {
-            Tax = await _context.Tax.ToListAsync();
+            Tax = await _context.Taxes.ToListAsync();
         }
     }
 }

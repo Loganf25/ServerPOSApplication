@@ -36,7 +36,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Credentials
                 return Page();
             }
 
-            _context.Credential.Add(Credential);
+            _context.Credentials.Add(Credential);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

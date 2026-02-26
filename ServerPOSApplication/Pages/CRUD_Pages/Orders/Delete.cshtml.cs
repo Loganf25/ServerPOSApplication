@@ -29,7 +29,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Orders
                 return NotFound();
             }
 
-            var order = await _context.Order.FirstOrDefaultAsync(m => m.Id == id);
+            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
 
             if (order is not null)
             {
@@ -48,11 +48,11 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Orders
                 return NotFound();
             }
 
-            var order = await _context.Order.FindAsync(id);
+            var order = await _context.Orders.FindAsync(id);
             if (order != null)
             {
                 Order = order;
-                _context.Order.Remove(Order);
+                _context.Orders.Remove(Order);
                 await _context.SaveChangesAsync();
             }
 

@@ -23,7 +23,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Orders
 
         public async Task OnGetAsync()
         {
-            Order = await _context.Order
+            Order = await _context.Orders
                 .Include(o => o.Employee).ToListAsync();
         }
     }

@@ -30,7 +30,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Credentials
                 return NotFound();
             }
 
-            var credential =  await _context.Credential.FirstOrDefaultAsync(m => m.Id == id);
+            var credential =  await _context.Credentials.FirstOrDefaultAsync(m => m.Id == id);
             if (credential == null)
             {
                 return NotFound();
@@ -72,7 +72,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Credentials
 
         private bool CredentialExists(int id)
         {
-            return _context.Credential.Any(e => e.Id == id);
+            return _context.Credentials.Any(e => e.Id == id);
         }
     }
 }

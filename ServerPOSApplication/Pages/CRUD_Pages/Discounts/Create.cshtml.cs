@@ -35,7 +35,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Discounts
                 return Page();
             }
 
-            _context.Discount.Add(Discount);
+            _context.Discounts.Add(Discount);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -35,7 +35,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.MenuItems
                 return Page();
             }
 
-            _context.MenuItem.Add(MenuItem);
+            _context.MenuItems.Add(MenuItem);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

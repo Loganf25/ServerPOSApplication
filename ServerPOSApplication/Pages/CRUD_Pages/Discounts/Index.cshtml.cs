@@ -23,7 +23,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Discounts
 
         public async Task OnGetAsync()
         {
-            Discount = await _context.Discount.ToListAsync();
+            Discount = await _context.Discounts.ToListAsync();
         }
     }
 }

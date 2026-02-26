@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServerPOSApplication.Data;
 
@@ -11,9 +12,11 @@ using ServerPOSApplication.Data;
 namespace ServerPOSApplication.Migrations
 {
     [DbContext(typeof(ServerPOSApplicationContext))]
-    partial class ServerPOSApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20260226153911_TaxPercChange")]
+    partial class TaxPercChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +49,7 @@ namespace ServerPOSApplication.Migrations
                     b.HasIndex("EmployeeId")
                         .IsUnique();
 
-                    b.ToTable("Credentials");
+                    b.ToTable("Credential");
                 });
 
             modelBuilder.Entity("ServerPOSApplication.Models.Discount", b =>
@@ -70,7 +73,7 @@ namespace ServerPOSApplication.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Discounts");
+                    b.ToTable("Discount");
                 });
 
             modelBuilder.Entity("ServerPOSApplication.Models.Employee", b =>
@@ -91,7 +94,7 @@ namespace ServerPOSApplication.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("ServerPOSApplication.Models.MenuItem", b =>
@@ -111,7 +114,7 @@ namespace ServerPOSApplication.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MenuItems");
+                    b.ToTable("MenuItem");
                 });
 
             modelBuilder.Entity("ServerPOSApplication.Models.Order", b =>
@@ -144,7 +147,7 @@ namespace ServerPOSApplication.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("ServerPOSApplication.Models.OrderItem", b =>
@@ -173,7 +176,7 @@ namespace ServerPOSApplication.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItem");
                 });
 
             modelBuilder.Entity("ServerPOSApplication.Models.Tax", b =>
@@ -193,7 +196,7 @@ namespace ServerPOSApplication.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Taxes");
+                    b.ToTable("Tax");
                 });
 
             modelBuilder.Entity("ServerPOSApplication.Models.Credential", b =>

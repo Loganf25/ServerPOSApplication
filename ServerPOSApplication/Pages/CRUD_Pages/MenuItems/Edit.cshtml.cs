@@ -30,7 +30,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.MenuItems
                 return NotFound();
             }
 
-            var menuitem =  await _context.MenuItem.FirstOrDefaultAsync(m => m.Id == id);
+            var menuitem =  await _context.MenuItems.FirstOrDefaultAsync(m => m.Id == id);
             if (menuitem == null)
             {
                 return NotFound();
@@ -71,7 +71,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.MenuItems
 
         private bool MenuItemExists(int id)
         {
-            return _context.MenuItem.Any(e => e.Id == id);
+            return _context.MenuItems.Any(e => e.Id == id);
         }
     }
 }

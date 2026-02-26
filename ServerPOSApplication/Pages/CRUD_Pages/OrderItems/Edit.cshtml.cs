@@ -30,13 +30,13 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.OrderItems
                 return NotFound();
             }
 
-            var orderitem =  await _context.OrderItem.FirstOrDefaultAsync(m => m.Id == id);
+            var orderitem =  await _context.OrderItems.FirstOrDefaultAsync(m => m.Id == id);
             if (orderitem == null)
             {
                 return NotFound();
             }
             OrderItem = orderitem;
-           ViewData["MenuItemId"] = new SelectList(_context.MenuItem, "Id", "Id");
+           ViewData["MenuItemId"] = new SelectList(_context.MenuItems, "Id", "Id");
             return Page();
         }
 
@@ -72,7 +72,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.OrderItems
 
         private bool OrderItemExists(int id)
         {
-            return _context.OrderItem.Any(e => e.Id == id);
+            return _context.OrderItems.Any(e => e.Id == id);
         }
     }
 }

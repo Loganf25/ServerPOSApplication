@@ -23,7 +23,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Credentials
 
         public async Task OnGetAsync()
         {
-            Credential = await _context.Credential
+            Credential = await _context.Credentials
                 .Include(c => c.Employee).ToListAsync();
         }
     }

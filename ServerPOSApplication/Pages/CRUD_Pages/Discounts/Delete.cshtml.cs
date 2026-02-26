@@ -29,7 +29,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Discounts
                 return NotFound();
             }
 
-            var discount = await _context.Discount.FirstOrDefaultAsync(m => m.Id == id);
+            var discount = await _context.Discounts.FirstOrDefaultAsync(m => m.Id == id);
 
             if (discount is not null)
             {
@@ -48,11 +48,11 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Discounts
                 return NotFound();
             }
 
-            var discount = await _context.Discount.FindAsync(id);
+            var discount = await _context.Discounts.FindAsync(id);
             if (discount != null)
             {
                 Discount = discount;
-                _context.Discount.Remove(Discount);
+                _context.Discounts.Remove(Discount);
                 await _context.SaveChangesAsync();
             }
 

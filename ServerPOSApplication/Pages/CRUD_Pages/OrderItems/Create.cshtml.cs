@@ -21,7 +21,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.OrderItems
 
         public IActionResult OnGet()
         {
-        ViewData["MenuItemId"] = new SelectList(_context.MenuItem, "Id", "Id");
+        ViewData["MenuItemId"] = new SelectList(_context.MenuItems, "Id", "Id");
             return Page();
         }
 
@@ -36,7 +36,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.OrderItems
                 return Page();
             }
 
-            _context.OrderItem.Add(OrderItem);
+            _context.OrderItems.Add(OrderItem);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
