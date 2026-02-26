@@ -27,7 +27,7 @@ namespace ServerPOSApplication.Models
                 {
                     yield return new ValidationResult("For percentage discounts, value must be a whole number.", new[] { nameof(Value) });
                 }
-                
+
             }
             else if (Type == "Fixed")
             {
@@ -41,4 +41,5 @@ namespace ServerPOSApplication.Models
                 }
             }
         }
+    }
 }
