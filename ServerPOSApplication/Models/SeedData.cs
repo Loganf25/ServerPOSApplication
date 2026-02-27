@@ -10,7 +10,7 @@ public class SeedData
         using (var context = new ServerPOSApplicationContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ServerPOSApplicationContext>>()))
         {
-            if (context == null || context.Discounts == null || context.Credentials == null || context.Employees == null
+            if (context == null || context.Discounts == null || context.Employees == null
                     || context.MenuItems == null || context.Orders == null || context.OrderItems == null || context.Taxes == null)
             {
                 throw new ArgumentNullException("Null ServerPOSApplicationContext");
@@ -27,21 +27,11 @@ public class SeedData
                  {
                      FirstName = "John",
                      LastName = "Doe",
-                     Credential = new Credential
-                     {
-                         UserName = "jd01",
-                         PasswordHash = "hashedpassword"
-                     }
                  },
                  new Employee
                  {
                      FirstName = "James",
                      LastName = "Brown",
-                     Credential = new Credential
-                     {
-                         UserName = "jb01",
-                         PasswordHash = "hashedpassword1"
-                     }
                  });
 
             context.Discounts.AddRange(

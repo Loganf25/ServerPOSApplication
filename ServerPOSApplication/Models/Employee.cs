@@ -14,6 +14,6 @@ namespace ServerPOSApplication.Models
         [StringLength(25, ErrorMessage = "Last Name cannot be longer than 25 characters.")]
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Last Name can only contain letters.")]
         public required string LastName { get; set; }
-        public virtual required Credential Credential { get; set; }
+        public string? IdentityUserId { get; set; }
     }
 }

@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ServerPOSApplication.Models;
 
 namespace ServerPOSApplication.Data
 {
-    public class ServerPOSApplicationContext : DbContext
+    public class ServerPOSApplicationContext : IdentityDbContext
     {
         public ServerPOSApplicationContext (DbContextOptions<ServerPOSApplicationContext> options)
             : base(options)
         {
         }
-        public DbSet<ServerPOSApplication.Models.Credential> Credentials { get; set; } = default!;
         public DbSet<ServerPOSApplication.Models.Discount> Discounts { get; set; } = default!;
         public DbSet<ServerPOSApplication.Models.Employee> Employees { get; set; } = default!;
         public DbSet<ServerPOSApplication.Models.MenuItem> MenuItems { get; set; } = default!;
