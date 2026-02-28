@@ -65,8 +65,9 @@ namespace ServerPOSApplication.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            [Display(Name = "Employee ID")]
+            [RegularExpression(@"^[a-zA-Z0-9]{4}$", ErrorMessage = "Employee ID can only contain letters and numbers. Must be four long.")]
+            public string Username { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -103,6 +104,7 @@ namespace ServerPOSApplication.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            // Redirect to the app root (the Index page) when no returnUrl is provided
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -111,15 +113,23 @@ namespace ServerPOSApplication.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
+
+                   
                 }
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                }
+                if (result.IsNotAllowed)
+                {
+                    // Commonly happens when email confirmation is required but not completed
+                    ModelState.AddModelError(string.Empty, "Login is not allowed. Make sure your email is confirmed.");
+                    return Page();
                 }
                 if (result.IsLockedOut)
                 {

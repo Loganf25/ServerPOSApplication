@@ -1,0 +1,19 @@
+﻿@page
+@model ServerPOSApplication.Pages.CRUD_Pages.Employees.FinishProfileModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Complete Profile</h1>
+
+<form method="post">
+    <div class="form_group">
+        <label asp-for="Input.FirstName"></label>
+        <input asp-for="Input.FirstName" />
+    </div>
+    <div class="form_group">
+        <label asp-for="Input.LastName"></label>
+        <input asp-for="Input.LastName" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save Profile</button>
+</form>

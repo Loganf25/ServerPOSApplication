@@ -9,12 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages(options =>
 {
-    options.Conventions.AuthorizeFolder("/"); 
+    options.Conventions.AuthorizeFolder("/");
+    options.Conventions.AllowAnonymousToAreaPage("Identity", "/Account/Login"); 
 });
 builder.Services.AddDbContext<ServerPOSApplicationContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ServerPOSApplicationContext") ?? throw new InvalidOperationException("Connection string 'ServerPOSApplicationContext' not found.")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ServerPOSApplicationContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ServerPOSApplicationContext>();
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireDigit = true;
@@ -27,7 +28,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.AllowedForNewUsers = true;
     options.User.AllowedUserNameCharacters =
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     options.User.RequireUniqueEmail = false;
 });
 
@@ -77,10 +78,4 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages()
 .WithStaticAssets();
-app.MapGet("/", context =>
-{
-    context.Response.Redirect("Identity/Account/Login");
-    return Task.CompletedTask;
-});
-
 app.Run();

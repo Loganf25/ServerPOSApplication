@@ -22,18 +22,6 @@ public class SeedData
                 return;   // DB has been seeded
             }
 
-             context.Employees.AddRange(
-                 new Employee
-                 {
-                     FirstName = "John",
-                     LastName = "Doe",
-                 },
-                 new Employee
-                 {
-                     FirstName = "James",
-                     LastName = "Brown",
-                 });
-
             context.Discounts.AddRange(
                 new Discount { Name = "Veteran Discount", Type = "Percentage", Value = 20 },
                 new Discount { Name = "Employee Discount", Type = "Percentage", Value = 50 },
