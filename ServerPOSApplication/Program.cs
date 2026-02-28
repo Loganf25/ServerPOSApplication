@@ -15,7 +15,9 @@ builder.Services.AddRazorPages(options =>
 builder.Services.AddDbContext<ServerPOSApplicationContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ServerPOSApplicationContext") ?? throw new InvalidOperationException("Connection string 'ServerPOSApplicationContext' not found.")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ServerPOSApplicationContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ServerPOSApplicationContext>();
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireDigit = true;
@@ -51,7 +53,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
-        SeedData.Initialize(services);
+        await SeedData.Initialize(services);
     }
     catch (Exception ex)
     {

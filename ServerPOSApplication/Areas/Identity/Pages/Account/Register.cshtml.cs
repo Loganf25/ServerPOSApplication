@@ -140,7 +140,7 @@ namespace ServerPOSApplication.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        await _userManager.AddToRoleAsync(user, "Server");
                         return RedirectToPage("/CRUD_Pages/Employees/FinishProfile");
                     }
                 }

@@ -25,12 +25,6 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
                         @if (SignInManager.IsSignedIn(User))
                             {
                                 var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
@@ -38,8 +32,15 @@
 
                                 @if (isProfileComplete)
                                 {
+                                    @if (User.IsInRole("Manager"))
+                                    {
+                                        <li class="nav-item"><a class="nav-link" asp-page="/CRUD_Pages/Employees/Index">Manage Employees</a></li>
+                                        <li class="nav-item"><a class="nav-link" asp-page="/CRUD_Pages/MenuItems/Index">Manage Menu</a></li>
+                                        <li class="nav-item"><a class="nav-link" asp-page="/CRUD_Pages/Taxes/Index">Manage Taxes</a></li>
+                                        <li class="nav-item"><a class="nav-link" asp-page="/CRUD_Pages/Discounts/Index">Manage Discounts</a></li>
+                                    }
+                                    <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-page="/Index">Place Order</a></li>
                                     <li class="nav-item"><a class="nav-link" asp-page="/CRUD_Pages/Orders/Index">Orders</a></li>
-                                    <li class="nav-item"><a class="nav-link" asp-page="/CRUD_Pages/MenuItems/Index">Menu</a></li>
                                     <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="~/" method="post" class="d-inline">
                                         <button type="submit" class="nav btn btn-link">Logout</button>
                                     </form>
@@ -49,6 +50,9 @@
                                     <li class="nav-item"><a class="nav-link text-danger font-weight-bold" asp-page="/CRUD_Pages/Employees/FinishProfile">Complete Profile Setup First</a></li>
                                 }
                             }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                        </li>
                         </ul>
                 </div>
             </div>

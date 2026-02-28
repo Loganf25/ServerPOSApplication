@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace ServerPOSApplication.Pages.CRUD_Pages.MenuItems
 {
+    [Authorize(Roles = "Manager")]
     public class IndexModel : PageModel
     {
         private readonly ServerPOSApplication.Data.ServerPOSApplicationContext _context;
