@@ -9,18 +9,18 @@ namespace ServerPOSApplication.Models
         public int Id { get; set; }
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
-        public virtual required Employee Employee { get; set; }
+        public virtual Employee? Employee { get; set; }
         [Column(TypeName = "decimal(18, 2)")]
-        public int SubTotal { get; set; }
+        public decimal SubTotal { get; set; }
         [Display(Name = "Tax Total")]
         [Column(TypeName = "decimal(18, 2)")]
-        public int AfterTaxTotal { get; set; }
+        public decimal AfterTaxTotal { get; set; }
         [Display(Name = "Discount Total")]
         [Column(TypeName = "decimal(18, 2)")]
-        public int AfterDiscountTotal { get; set; }
+        public decimal AfterDiscountTotal { get; set; }
         [Display(Name = "Grand Total")]
         [Column(TypeName = "decimal(18, 2)")]
-        public int FinalTotal { get; set; }
+        public decimal FinalTotal { get; set; }
         [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
         public virtual required ICollection<OrderItem> OrderItem { get; set; }

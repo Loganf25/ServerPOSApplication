@@ -6,5 +6,124 @@
 
 <div class="text-center">
     <h1 class="display-4">Select Menu Items and Place Order</h1>
-    
 </div>
+<div class="col-md-8">
+    <h3>Menu</h3>
+    <div class="row">
+        @foreach (var item in Model.MenuItems)
+        {
+            <div class="col-3 mb-3">
+                <button class="btn btn-outline-primary btn-block p-4"
+                        onclick="addItem('@item.Id', '@item.Name', '@item.Price')">
+                    @item.Name <br /> $@item.Price
+                </button>
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <div class="col-md-4 border-left">
+        <h3>Current Order</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="orderItemsBody">
+                <!-- Order items will be added here dynamically -->
+            </tbody>
+        </table>
+        <div class="form-group">
+            <label>Apply Discount</label>
+            <select id="discountSelect" class=""form-control" onchange="updateTotals()">
+                <option value="">-- Select Discount --</option>
+                @foreach (var discount in Model.Discounts)
+                {
+                    <option value="@discount.Id" data-type="@discount.Type" data-interval="@discount.Value">@discount.Name</option>
+                }
+            </select>
+        </div>
+        <hr />
+        <div class="h5">Subtotal: $<span id="displaySubTotal">0.00</span></div>
+        <div class="h5">Discount: - $<span id="displayDiscount">0.00</span></div>
+        <div class="h5">Pre Tax Total: $<span id="displayPreTaxTotal">0.00</span></div>
+        <div class="h5">Tax: $<span id="displayTax">0.00</span></div>
+        <div class="h5">Total: $<span id="displayTotal">0.00</span></div>
+        
+        <form method="post">
+            <input type="hidden" id="orderData" name="orderData" />
+            <input type="hidden" asp-for="SelectedDiscountId" id="hiddenDiscountid" />
+            <button type="submit" class="btn btn-success btn-block btn-lg">Place Order</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let cart = [];
+
+        function addItem(id, name, price) {
+            let existingItem = cart.find(i => i.id === id);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({MenuItemsId: id, Name: name, Price: price, Quantity: 1 });
+            }
+            renderCart();
+        }
+
+        function renderCart() {
+            let tbody = document.getElementById('orderItemsBody');
+            tbody.innerHTML = '';
+            cart.forEach((item, index) => {
+                tbody.innerHTML += `<tr>
+                    <td>${item.Name}</td>
+                    <td><input type="number" value="${item.Quantity}" class="form-control form-control-sm" "style="width:60px" onChange="updateQty(${index}, this.value)"></td>
+                    <td>$${(item.Price * item.Quantity).toFixed(2)}</td>
+                    <td><button class="btn btn-sm btn-danger" onclick="removeItem('${index}')">Remove</button></td>
+                </tr>`;
+            });
+            updateTotals();
+        }
+
+        function updateTotals() {
+            let subTotal = cart.reduce((sum, item) => sum + (item.Price * item.Quantity), 0);
+            let discountAmount = 0;
+            let selectedDiscount = document.getElementById('discountSelect').selectedOptions[0];
+            if (selectedDiscount && selectedDiscount.value) {
+                let type = selectedDiscount.getAttribute('data-type');
+                let interval = parseFloat(selectedDiscount.getAttribute('data-interval'));
+                discountAmount = type === 'Percentage' ? subTotal * (interval / 100) : interval;
+            }
+            let preTaxTotal = subTotal - discountAmount;
+            let taxRate = @Model.TotalTaxRate;
+            let taxAmount = preTaxTotal * taxRate;
+            let total = preTaxTotal + taxAmount;
+
+            document.getElementById('displaySubTotal').innerText = subTotal.toFixed(2);
+            document.getElementById('displayDiscount').innerText = discountAmount.toFixed(2);
+            document.getElementById('displayPreTaxTotal').innerText = preTaxTotal.toFixed(2);
+            document.getElementById('displayTax').innerText = taxAmount.toFixed(2);
+            document.getElementById('displayTotal').innerText = total.toFixed(2);
+            // Update hidden fields for form submission
+            document.getElementById('orderData').value = JSON.stringify(cart);
+            document.getElementById('hiddenDiscountid').value = selectedDiscount ? selectedDiscount.value : '';
+
+        }
+
+        function updateQty(index, newQty) {
+            cart[index].Quantity = parseInt(newQty);
+            renderCart();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+    </script>
+}

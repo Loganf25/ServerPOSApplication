@@ -11,7 +11,7 @@ namespace ServerPOSApplication.Models
         public int OrderId { get; set; }
         [ForeignKey("MenuItem")]
         public int MenuItemId { get; set; }
-        public virtual required MenuItem MenuItem { get; set; }
+        public virtual MenuItem? MenuItem { get; set; }
         public int Quantity { get; set; }
         [Column(TypeName = "decimal(18, 2)")]
         public decimal PriceAtSale { get; set; }
