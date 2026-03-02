@@ -5,11 +5,13 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Select Menu Items and Place Order</h1>
+    <h1 class="display-4">Place an Order</h1>
 </div>
 <div class="col-md-8">
     <h3>Menu</h3>
     <div class="row">
+        @if (Model.MenuItems != null)
+        {
         @foreach (var item in Model.MenuItems)
         {
             <div class="col-3 mb-3">
@@ -18,6 +20,7 @@
                     @item.Name <br /> $@item.Price
                 </button>
             </div>
+        }
         }
     </div>
 </div>
@@ -42,9 +45,12 @@
             <label>Apply Discount</label>
             <select id="discountSelect" class=""form-control" onchange="updateTotals()">
                 <option value="">-- Select Discount --</option>
+                @if (Model.Discounts != null)
+                {
                 @foreach (var discount in Model.Discounts)
                 {
                     <option value="@discount.Id" data-type="@discount.Type" data-interval="@discount.Value">@discount.Name</option>
+                }
                 }
             </select>
         </div>
@@ -68,11 +74,13 @@
         let cart = [];
 
         function addItem(id, name, price) {
-            let existingItem = cart.find(i => i.id === id);
+            let numericId = parseInt(id);
+            let existingItem = cart.find(i => i.MenuItemid === numericId);
+
             if (existingItem) {
                 existingItem.quantity++;
             } else {
-                cart.push({MenuItemsId: id, Name: name, Price: price, Quantity: 1 });
+                cart.push({MenuItemId: numericId, Name: name, Price: price, Quantity: 1 });
             }
             renderCart();
         }
