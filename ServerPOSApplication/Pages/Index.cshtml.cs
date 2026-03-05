@@ -38,8 +38,6 @@ namespace ServerPOSApplication.Pages
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employee = await _context.Employees.FirstOrDefaultAsync(e => e.IdentityUserId == userId);
 
-            if (employee == null) return RedirectToPage("/CRUD_Pages/Employees/CompleteProfile");
-
             var cartItems = JsonSerializer.Deserialize<List<CartItemDto>>(OrderData);
             // Guard against null deserialization result to avoid CS8602 on foreach
             if (cartItems == null || cartItems.Count == 0) return Page();
@@ -86,9 +84,10 @@ namespace ServerPOSApplication.Pages
             decimal totalTaxPercentage = taxes.Sum(t => t.Percentage) / 100m;
 
             order.SubTotal = subTotal;
-            order.AfterDiscountTotal = subTotal - discountAmount;
-            order.AfterTaxTotal = order.AfterDiscountTotal * totalTaxPercentage;
-            order.FinalTotal = order.AfterDiscountTotal + order.AfterTaxTotal;
+            order.DiscountAmount = discountAmount;
+            order.PreTaxTotal = Math.Max(0, subTotal - discountAmount);
+            order.TaxAmount = order.PreTaxTotal * totalTaxPercentage;
+            order.FinalTotal = order.PreTaxTotal + order.TaxAmount;
 
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();

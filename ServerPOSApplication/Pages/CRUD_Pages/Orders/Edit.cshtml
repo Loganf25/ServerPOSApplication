@@ -1,8 +1,9 @@
-﻿@page "{id:int}"
+﻿@page
 @model ServerPOSApplication.Pages.CRUD_Pages.Orders.EditModel
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
 <h1>Edit</h1>
@@ -25,14 +26,19 @@
                 <span asp-validation-for="Order.SubTotal" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.AfterTaxTotal" class="control-label"></label>
-                <input asp-for="Order.AfterTaxTotal" class="form-control" />
-                <span asp-validation-for="Order.AfterTaxTotal" class="text-danger"></span>
+                <label asp-for="Order.DiscountAmount" class="control-label"></label>
+                <input asp-for="Order.DiscountAmount" class="form-control" />
+                <span asp-validation-for="Order.DiscountAmount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.AfterDiscountTotal" class="control-label"></label>
-                <input asp-for="Order.AfterDiscountTotal" class="form-control" />
-                <span asp-validation-for="Order.AfterDiscountTotal" class="text-danger"></span>
+                <label asp-for="Order.PreTaxTotal" class="control-label"></label>
+                <input asp-for="Order.PreTaxTotal" class="form-control" />
+                <span asp-validation-for="Order.PreTaxTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.TaxAmount" class="control-label"></label>
+                <input asp-for="Order.TaxAmount" class="form-control" />
+                <span asp-validation-for="Order.TaxAmount" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Order.FinalTotal" class="control-label"></label>

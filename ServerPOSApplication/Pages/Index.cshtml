@@ -7,7 +7,8 @@
 <div class="text-center">
     <h1 class="display-4">Place an Order</h1>
 </div>
-<div class="col-md-8">
+<div class="row justify-content-center">
+<div id="menuScreen" class="col-md-8">
     <h3>Menu</h3>
     <div class="row">
         @if (Model.MenuItems != null)
@@ -15,7 +16,7 @@
         @foreach (var item in Model.MenuItems)
         {
             <div class="col-3 mb-3">
-                <button class="btn btn-outline-primary btn-block p-4"
+                <button id="menuButton" class="btn btn-outline-primary btn-block p-4"
                         onclick="addItem('@item.Id', '@item.Name', '@item.Price')">
                     @item.Name <br /> $@item.Price
                 </button>
@@ -24,8 +25,9 @@
         }
     </div>
 </div>
+</div>
 
-<div>
+<div id="orderScreen">
     <div class="col-md-4 border-left">
         <h3>Current Order</h3>
         <table class="table">
@@ -69,6 +71,7 @@
     </div>
 </div>
 
+@*Pretend this is C#*@     
 @section Scripts {
     <script>
         let cart = [];

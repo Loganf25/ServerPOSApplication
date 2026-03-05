@@ -1,3 +1,8 @@
+:root {
+    --bg-main: #1F1F1F;
+    --text-main: #FFEBD6; 
+}
+
 html {
   font-size: 14px;
 }
@@ -18,7 +23,22 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+}
+
+.table,
+.table th,
+.table td {
+    background-color: #1F1F1F !important;
+    color: #FFEBD6 !important;
+    border-color: #3D3D3D !important; 
+}
+
+.table-hover tbody tr:hover {
+    background-color: #2A2A2A !important;
+    color: #FFEBD6 !important;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -28,4 +48,47 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+#menuButton {
+    font-size: 0.7em;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-sizing: border-box;
+    color: #FFEBD6
+}
+
+#menuButton .btn-outline-primary {
+    border: 2px solid #8C93A8;
+    background-color: #3D3D3D;
+}
+
+#menuButton .btn-outline-primary:hover {
+    background-color: #8C93A8;
+    color: #3D3D3D !important;
+    border-color: #FFEBD6;
+}
+
+#orderScreen {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    text-align: center; 
+}
+
+#menuScreen {
+    text-align: center; 
+    margin-top: 40px; 
+    margin-bottom: 40px; 
+}
+
+#loginScreen {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
 }

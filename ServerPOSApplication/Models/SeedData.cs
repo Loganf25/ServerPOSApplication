@@ -47,7 +47,22 @@ public class SeedData
               
             }
 
-            if (!context.Discounts.Any())
+            var serverUserName = "sv01";
+            var serverUser = await userManager.FindByNameAsync(serverUserName);
+            if (serverUser == null)
+            {
+                serverUser = new IdentityUser { UserName = serverUserName, Email = "sever1@pos.com" };
+                var result = await userManager.CreateAsync(serverUser, "P@assword123!");
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(serverUser, "Server");
+                    context.Employees.Add(new Employee { FirstName = "Jane", LastName = "Doe", IdentityUserId = serverUser.Id });
+                }
+            }
+
+
+                if (!context.Discounts.Any())
             {
                 context.Discounts.AddRange(
                     new Discount { Name = "Veteran Discount", Type = "Percentage", Value = 20 },
