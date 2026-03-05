@@ -7,5 +7,5 @@ The menu is already seeded, and a couple of Orders are already placed to see tha
 
 Seeded Accounts are as follows:
 
-Server Account (jd01, P@ssword!) (New server accounts can also be registered) 
+Server Account (sv01, P@ssword123!) (New server accounts can also be registered) 
 Manager Account (mg01, Admin123!) 
