@@ -1,8 +1,9 @@
-﻿@page "{id:int}"
+﻿@page
 @model ServerPOSApplication.Pages.CRUD_Pages.Orders.DeleteModel
 
 @{
     ViewData["Title"] = "Delete";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
 <h1>Delete</h1>
@@ -25,16 +26,22 @@
             @Html.DisplayFor(model => model.Order.SubTotal)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Order.AfterTaxTotal)
+            @Html.DisplayNameFor(model => model.Order.DiscountAmount)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Order.AfterTaxTotal)
+            @Html.DisplayFor(model => model.Order.DiscountAmount)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Order.AfterDiscountTotal)
+            @Html.DisplayNameFor(model => model.Order.PreTaxTotal)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Order.AfterDiscountTotal)
+            @Html.DisplayFor(model => model.Order.PreTaxTotal)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Order.TaxAmount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order.TaxAmount)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Order.FinalTotal)

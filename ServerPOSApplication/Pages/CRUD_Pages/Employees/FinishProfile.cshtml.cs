@@ -45,7 +45,7 @@ namespace ServerPOSApplication.Pages.CRUD_Pages.Employees
             var newEmployee = new Employee
             {
                 FirstName = Input.FirstName,
-                LastName = Input.FirstName,
+                LastName = Input.LastName,
                 IdentityUserId = userId
             };
 

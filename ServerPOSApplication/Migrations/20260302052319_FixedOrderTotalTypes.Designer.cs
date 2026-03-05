@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServerPOSApplication.Data;
 
@@ -11,9 +12,11 @@ using ServerPOSApplication.Data;
 namespace ServerPOSApplication.Migrations
 {
     [DbContext(typeof(ServerPOSApplicationContext))]
-    partial class ServerPOSApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20260302052319_FixedOrderTotalTypes")]
+    partial class FixedOrderTotalTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -310,7 +313,10 @@ namespace ServerPOSApplication.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("DiscountAmount")
+                    b.Property<decimal>("AfterDiscountTotal")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("AfterTaxTotal")
                         .HasColumnType("decimal(18, 2)");
 
                     b.Property<int>("EmployeeId")
@@ -322,13 +328,7 @@ namespace ServerPOSApplication.Migrations
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("PreTaxTotal")
-                        .HasColumnType("decimal(18, 2)");
-
                     b.Property<decimal>("SubTotal")
-                        .HasColumnType("decimal(18, 2)");
-
-                    b.Property<decimal>("TaxAmount")
                         .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id");

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using ServerPOSApplication.Data;
 using ServerPOSApplication.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ServerPOSApplication.Pages.CRUD_Pages.Orders
 {
+    [Authorize(Roles = "Manager")]
     public class DetailsModel : PageModel
     {
         private readonly ServerPOSApplication.Data.ServerPOSApplicationContext _context;

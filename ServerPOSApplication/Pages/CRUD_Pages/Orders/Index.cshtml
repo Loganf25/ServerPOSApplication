@@ -3,27 +3,37 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    @if (User.IsInRole("Manager"))
+    {
+        <a asp-page="Create">Create New</a>
+    }
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].Employee)
+                @Html.DisplayNameFor(model => model.Order[0].Employee.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Employee.LastName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Order[0].SubTotal)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].AfterTaxTotal)
+                @Html.DisplayNameFor(model => model.Order[0].DiscountAmount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].AfterDiscountTotal)
+                @Html.DisplayNameFor(model => model.Order[0].PreTaxTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].TaxAmount)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Order[0].FinalTotal)
@@ -38,16 +48,22 @@
 @foreach (var item in Model.Order) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Employee.Id)
+                @Html.DisplayFor(modelItem => item.Employee.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.LastName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SubTotal)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AfterTaxTotal)
+                @Html.DisplayFor(modelItem => item.DiscountAmount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AfterDiscountTotal)
+                @Html.DisplayFor(modelItem => item.PreTaxTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxAmount)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FinalTotal)
@@ -56,9 +72,12 @@
                 @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                @if (User.IsInRole("Manager"))
+                {
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> 
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> 
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                }
             </td>
         </tr>
 }
