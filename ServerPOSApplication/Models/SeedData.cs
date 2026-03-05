@@ -52,7 +52,7 @@ public class SeedData
             if (serverUser == null)
             {
                 serverUser = new IdentityUser { UserName = serverUserName, Email = "sever1@pos.com" };
-                var result = await userManager.CreateAsync(serverUser, "P@assword123!");
+                var result = await userManager.CreateAsync(serverUser, "P@ssword123!");
 
                 if (result.Succeeded)
                 {
@@ -78,7 +78,7 @@ public class SeedData
                     new Tax { Name = "Arkansas Tax", Percentage = 7 });
             }
 
-            if (!context.Orders.Any())
+            if (!context.MenuItems.Any())
             {
                 context.MenuItems.AddRange(
                     new MenuItem { Name = "Burger", Price = 12.99m },
@@ -97,9 +97,54 @@ public class SeedData
                     new MenuItem { Name = "Mozzarella Sticks", Price = 4.99m }
                 );
             }
-
             context.SaveChanges();
-            
+
+            if (!context.Orders.Any())
+            {
+                var employee = context.Employees.FirstOrDefault(e => e.FirstName == "Jane");
+                var burger = context.MenuItems.FirstOrDefault(m => m.Name == "Burger");
+                var fries = context.MenuItems.FirstOrDefault(m => m.Name == "Fries");
+                var coke = context.MenuItems.FirstOrDefault(m => m.Name == "Coke");
+
+                if (employee != null && burger != null && fries != null && coke != null)
+                {
+                    context.Orders.AddRange(
+                        new Order
+                        {
+                            EmployeeId = employee.Id,
+                            SubTotal = burger.Price + fries.Price + coke.Price,
+                            DiscountAmount = 0,
+                            PreTaxTotal = burger.Price + fries.Price + coke.Price,
+                            TaxAmount = (burger.Price + fries.Price + coke.Price) * 0.1m, // Example tax calculation
+                            FinalTotal = (burger.Price + fries.Price + coke.Price) * 1.1m, // Example final total calculation
+                            OrderDate = DateTime.Now.AddHours(-2),
+                            OrderItem = new List<OrderItem>
+                            {
+                                new OrderItem { MenuItemId = burger.Id, Quantity = 1, PriceAtSale = burger.Price },
+                                new OrderItem { MenuItemId = fries.Id, Quantity = 1, PriceAtSale = fries.Price },
+                                new OrderItem { MenuItemId = coke.Id, Quantity = 1, PriceAtSale = coke.Price }
+                            }
+                        },
+                        new Order
+                        {
+                            EmployeeId = employee.Id,
+                            SubTotal = burger.Price * 2 + fries.Price * 2 + coke.Price * 2,
+                            DiscountAmount = 0,
+                            PreTaxTotal = burger.Price * 2 + fries.Price * 2 + coke.Price * 2,
+                            TaxAmount = (burger.Price * 2 + fries.Price * 2 + coke.Price * 2) * 0.1m, // Example tax calculation
+                            FinalTotal = (burger.Price * 2 + fries.Price * 2 + coke.Price * 2) * 1.1m, // Example final total calculation
+                            OrderDate = DateTime.Now.AddDays(-1),
+                            OrderItem = new List<OrderItem>
+                            {
+                                new OrderItem { MenuItemId = burger.Id, Quantity = 2, PriceAtSale = burger.Price },
+                                new OrderItem { MenuItemId = fries.Id, Quantity = 2, PriceAtSale = fries.Price },
+                                new OrderItem { MenuItemId = coke.Id, Quantity = 2, PriceAtSale = coke.Price }
+                            }
+                        }
+                    );
+                }
+                context.SaveChanges();
+            }
         }
     }
 }
