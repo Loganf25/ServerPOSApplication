@@ -5,6 +5,12 @@ This can only be seen from an admin account.
 The menu is already seeded, and a couple of Orders are already placed to see that page as well. 
 (CRUD usage is available as admin account, but viewable from server account.
 
+Quick Start:
+
+1. Clone the Repo
+2. Navigate to the repo folder and restore dependencies (dotnet restore)
+3. Initialize Database (dotnet run)
+
 Seeded Accounts are as follows:
 
 Server Account (sv01, P@ssword123!) (New server accounts can also be registered) 
