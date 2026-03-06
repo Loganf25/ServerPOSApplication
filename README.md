@@ -8,8 +8,9 @@ The menu is already seeded, and a couple of Orders are already placed to see tha
 Quick Start:
 
 1. Clone the Repo
-2. Navigate to the repo folder and restore dependencies (dotnet restore)
-3. Initialize Database (dotnet run)
+2. Run the program using https (Works with Chrome and Brave for sure)
+3. Navigate to the repo folder and restore dependencies (dotnet restore)
+4. Initialize Database (dotnet run)
 
 Seeded Accounts are as follows:
 
