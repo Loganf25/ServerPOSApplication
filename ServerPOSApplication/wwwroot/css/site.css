@@ -31,8 +31,8 @@ body {
 .table,
 .table th,
 .table td {
-    background-color: #1F1F1F !important;
-    color: #FFEBD6 !important;
+    background-color: var(--bg-main);
+    color: var(--text-main);
     border-color: #3D3D3D !important; 
 }
 
